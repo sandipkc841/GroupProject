@@ -1,0 +1,46 @@
+<!-- My Surveys Section -->
+<main>
+  <table class="my-surveys">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Survey Name</th>
+      <th>Start Date</th>
+      <th>Closing Date</th>
+      <th>View Responses</th>
+      <th>View Stats</th>
+
+    </tr>
+    </thead>
+
+    <tbody *ngFor="let survey of Surveys; let i = index">
+    <tr>
+      <td>{{ i + 1 }}</td>
+      <td>{{ survey.surveyName }}</td>
+      <td>{{ survey.startDate }}</td>
+      <td>{{ survey.closeDate }}</td>
+
+      <td>
+        <a class="view-button" href="/view-responses" (click)="saveId(survey._id, i)">View</a>
+      </td>
+
+
+      <div *ngIf="survey.surveyType == 'TF'; then tf else blank"></div>
+
+      <ng-template #tf>
+        <td>
+          <a class="view-button" href="/view-stats" (click)="saveId(survey._id, i)">View</a>
+        </td>
+      </ng-template>
+
+      <ng-template #blank>
+        <td>
+
+        </td>
+      </ng-template>
+
+
+    </tr>
+    </tbody>
+  </table>
+</main>
